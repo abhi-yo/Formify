@@ -3,6 +3,7 @@ import { z } from "zod";
 import { db } from "@/lib/db";
 import { submissionSchema } from "@/lib/validations";
 import { hashIP, verifyHMAC } from "@/lib/utils";
+import { logInfo, logError } from "@/lib/logger";
 
 export async function POST(request: NextRequest) {
   try {
@@ -52,12 +53,31 @@ export async function POST(request: NextRequest) {
     await db.eventLog.create({
       data: {
         projectId: project.id,
-        type: "submission_received",
+        type: "SUBMISSION_RECEIVED",
         metaJSON: {
           submissionId: submission.id,
           fieldsCount: Object.keys(fields).length,
           ipHash,
         },
+      },
+    });
+
+    await logInfo("Form submission received", {
+      projectId: project.id,
+      submissionId: submission.id,
+      metadata: {
+        fieldsCount: Object.keys(fields).length,
+        ipHash,
+        userAgent: userAgent.substring(0, 100),
+      },
+    });
+
+    const { inngest } = await import("@/lib/inngest");
+    await inngest.send({
+      name: "submission/created",
+      data: {
+        submissionId: submission.id,
+        projectId: project.id,
       },
     });
 
@@ -76,6 +96,13 @@ export async function POST(request: NextRequest) {
       );
     }
 
+    await logError("Submission processing failed", {
+      metadata: {
+        error: error instanceof Error ? error.message : "Unknown error",
+        stack: error instanceof Error ? error.stack : undefined,
+      },
+    });
+    
     console.error("Submission error:", error);
     return NextResponse.json(
       {
