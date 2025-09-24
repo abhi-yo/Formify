@@ -27,9 +27,11 @@ export async function performSecurityChecks(
     checks.push("suspicious_user_agent");
   }
 
-  if (userAgent.toLowerCase().includes("bot") || 
-      userAgent.toLowerCase().includes("crawler") ||
-      userAgent.toLowerCase().includes("spider")) {
+  if (
+    userAgent.toLowerCase().includes("bot") ||
+    userAgent.toLowerCase().includes("crawler") ||
+    userAgent.toLowerCase().includes("spider")
+  ) {
     score += 25;
     checks.push("bot_user_agent");
   }
@@ -49,9 +51,9 @@ export async function performSecurityChecks(
   }
 
   const totalTextLength = Object.values(fields)
-    .filter(v => typeof v === "string")
+    .filter((v) => typeof v === "string")
     .join("").length;
-  
+
   if (totalTextLength > 10000) {
     score += 20;
     checks.push("excessive_text_length");
@@ -73,14 +75,18 @@ export async function performSecurityChecks(
     }
   }
 
-  const clientIP = request.headers.get("x-forwarded-for") || 
-                   request.headers.get("x-real-ip") || 
-                   "127.0.0.1";
+  const clientIP =
+    request.headers.get("x-forwarded-for") ||
+    request.headers.get("x-real-ip") ||
+    "127.0.0.1";
 
   const recentSubmissions = await db.submission.count({
     where: {
       projectId,
-      ipHash: require("crypto").createHash("sha256").update(clientIP).digest("hex"),
+      ipHash: require("crypto")
+        .createHash("sha256")
+        .update(clientIP)
+        .digest("hex"),
       createdAt: {
         gte: new Date(Date.now() - 3600000),
       },
@@ -124,18 +130,18 @@ export async function performSecurityChecks(
 export function generateHoneypotFields(): Record<string, string> {
   const fields = [
     "email_address",
-    "website_url", 
+    "website_url",
     "company_name",
     "phone_number",
     "full_name",
   ];
-  
+
   const honeypots: Record<string, string> = {};
   for (let i = 0; i < 2; i++) {
     const field = fields[Math.floor(Math.random() * fields.length)];
     honeypots[field] = "";
   }
-  
+
   return honeypots;
 }
 

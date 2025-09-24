@@ -12,7 +12,9 @@ export interface ProofOfWorkSolution {
   timestamp: number;
 }
 
-export function generateChallenge(difficulty: number = 4): ProofOfWorkChallenge {
+export function generateChallenge(
+  difficulty: number = 4
+): ProofOfWorkChallenge {
   const challenge = crypto.randomBytes(16).toString("hex");
   return {
     challenge,
@@ -26,7 +28,7 @@ export function verifyProofOfWork(
   difficulty: number = 4
 ): boolean {
   const { challenge, nonce, timestamp } = solution;
-  
+
   const timeDiff = Date.now() - timestamp;
   if (timeDiff > 300000) {
     return false;

@@ -36,8 +36,10 @@ export async function checkRateLimit(
   remaining: number;
   reset: Date;
 }> {
-  const { success, limit, remaining, reset } = await rateLimiter.limit(identifier);
-  
+  const { success, limit, remaining, reset } = await rateLimiter.limit(
+    identifier
+  );
+
   return {
     success,
     limit,

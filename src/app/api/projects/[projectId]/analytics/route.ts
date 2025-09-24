@@ -102,7 +102,9 @@ export async function GET(
     });
 
     const topViolationReasons = violationReasons.map((item) => ({
-      reason: (item.metaJSON as Record<string, unknown>)?.reason as string || "Unknown",
+      reason:
+        ((item.metaJSON as Record<string, unknown>)?.reason as string) ||
+        "Unknown",
       count: item._count.id,
     }));
 
@@ -120,7 +122,8 @@ export async function GET(
       take: 20,
     });
 
-    const blockedSubmissions = securityViolations + rateLimitHits + honeypotTriggers;
+    const blockedSubmissions =
+      securityViolations + rateLimitHits + honeypotTriggers;
 
     const metrics = {
       totalSubmissions,

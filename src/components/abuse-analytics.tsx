@@ -37,7 +37,9 @@ export function AbuseAnalytics({ projectId }: AbuseAnalyticsProps) {
   const fetchMetrics = async () => {
     setLoading(true);
     try {
-      const response = await fetch(`/api/projects/${projectId}/analytics?range=${timeRange}`);
+      const response = await fetch(
+        `/api/projects/${projectId}/analytics?range=${timeRange}`
+      );
       if (response.ok) {
         const data = await response.json();
         setMetrics(data.metrics);
@@ -67,16 +69,19 @@ export function AbuseAnalytics({ projectId }: AbuseAnalyticsProps) {
     );
   }
 
-  const blockRate = metrics.totalSubmissions > 0 
-    ? ((metrics.blockedSubmissions / metrics.totalSubmissions) * 100).toFixed(1)
-    : "0";
+  const blockRate =
+    metrics.totalSubmissions > 0
+      ? ((metrics.blockedSubmissions / metrics.totalSubmissions) * 100).toFixed(
+          1
+        )
+      : "0";
 
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <h2 className="text-2xl font-bold">Abuse Analytics</h2>
         <div className="flex items-center gap-2">
-          <select 
+          <select
             value={timeRange}
             onChange={(e) => setTimeRange(e.target.value)}
             className="px-3 py-1 border rounded text-sm"
@@ -117,7 +122,9 @@ export function AbuseAnalytics({ projectId }: AbuseAnalyticsProps) {
               <Ban className="h-5 w-5 text-red-600" />
               <div>
                 <p className="text-sm text-gray-600">Blocked</p>
-                <p className="text-2xl font-bold">{metrics.blockedSubmissions}</p>
+                <p className="text-2xl font-bold">
+                  {metrics.blockedSubmissions}
+                </p>
                 <p className="text-xs text-gray-500">{blockRate}% block rate</p>
               </div>
             </div>
@@ -130,7 +137,9 @@ export function AbuseAnalytics({ projectId }: AbuseAnalyticsProps) {
               <AlertTriangle className="h-5 w-5 text-yellow-600" />
               <div>
                 <p className="text-sm text-gray-600">Security Violations</p>
-                <p className="text-2xl font-bold">{metrics.securityViolations}</p>
+                <p className="text-2xl font-bold">
+                  {metrics.securityViolations}
+                </p>
               </div>
             </div>
           </CardContent>
@@ -156,12 +165,19 @@ export function AbuseAnalytics({ projectId }: AbuseAnalyticsProps) {
           </CardHeader>
           <CardContent>
             {metrics.topViolationReasons.length === 0 ? (
-              <p className="text-center text-gray-500 py-4">No violations recorded</p>
+              <p className="text-center text-gray-500 py-4">
+                No violations recorded
+              </p>
             ) : (
               <div className="space-y-3">
                 {metrics.topViolationReasons.map((reason, index) => (
-                  <div key={index} className="flex items-center justify-between">
-                    <span className="text-sm">{reason.reason.replace(/_/g, " ")}</span>
+                  <div
+                    key={index}
+                    className="flex items-center justify-between"
+                  >
+                    <span className="text-sm">
+                      {reason.reason.replace(/_/g, " ")}
+                    </span>
                     <Badge variant="secondary">{reason.count}</Badge>
                   </div>
                 ))}
@@ -176,14 +192,20 @@ export function AbuseAnalytics({ projectId }: AbuseAnalyticsProps) {
           </CardHeader>
           <CardContent>
             {metrics.recentViolations.length === 0 ? (
-              <p className="text-center text-gray-500 py-4">No recent violations</p>
+              <p className="text-center text-gray-500 py-4">
+                No recent violations
+              </p>
             ) : (
               <div className="space-y-3">
                 {metrics.recentViolations.slice(0, 5).map((violation) => (
                   <div key={violation.id} className="border rounded p-3">
                     <div className="flex items-center justify-between mb-2">
-                      <Badge 
-                        variant={violation.type === "SECURITY_VIOLATION" ? "destructive" : "secondary"}
+                      <Badge
+                        variant={
+                          violation.type === "SECURITY_VIOLATION"
+                            ? "destructive"
+                            : "secondary"
+                        }
                       >
                         {violation.type.replace(/_/g, " ")}
                       </Badge>

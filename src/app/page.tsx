@@ -11,6 +11,18 @@ export default function HomePage() {
               <h1 className="text-2xl font-bold text-gray-900">Formify</h1>
             </div>
             <div className="flex items-center space-x-4">
+              <Link
+                href="/demo"
+                className="text-gray-600 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium"
+              >
+                Demo
+              </Link>
+              <Link
+                href="/docs"
+                className="text-gray-600 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium"
+              >
+                Docs
+              </Link>
               <SignedOut>
                 <SignInButton>
                   <button className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700">

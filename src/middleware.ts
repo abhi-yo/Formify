@@ -20,7 +20,10 @@ export default clerkMiddleware((auth, req: NextRequest) => {
     response.headers.set("Access-Control-Max-Age", "86400");
   }
 
-  if (req.method === "OPTIONS" && req.nextUrl.pathname.startsWith("/api/submit")) {
+  if (
+    req.method === "OPTIONS" &&
+    req.nextUrl.pathname.startsWith("/api/submit")
+  ) {
     return new NextResponse(null, { status: 200, headers: response.headers });
   }
 

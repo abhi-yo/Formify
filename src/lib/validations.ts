@@ -6,11 +6,13 @@ export const submissionSchema = z.object({
   honeypot: z.string().optional(),
   timestamp: z.number(),
   signature: z.string(),
-  proofOfWork: z.object({
-    challenge: z.string(),
-    nonce: z.string(),
-    timestamp: z.number(),
-  }).optional(),
+  proofOfWork: z
+    .object({
+      challenge: z.string(),
+      nonce: z.string(),
+      timestamp: z.number(),
+    })
+    .optional(),
 });
 
 export const projectSchema = z.object({
