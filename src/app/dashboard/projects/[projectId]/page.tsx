@@ -4,6 +4,7 @@ import { db } from "@/lib/db";
 import { SubmissionsTable } from "@/components/submissions-table";
 import { ProjectSettings } from "@/components/project-settings";
 import { EventLogs } from "@/components/event-logs";
+import { AbuseAnalytics } from "@/components/abuse-analytics";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 export default async function ProjectPage({
@@ -60,10 +61,11 @@ export default async function ProjectPage({
       </div>
 
       <Tabs defaultValue="submissions" className="w-full">
-        <TabsList className="grid w-full grid-cols-4">
+        <TabsList className="grid w-full grid-cols-5">
           <TabsTrigger value="submissions">Submissions</TabsTrigger>
           <TabsTrigger value="integration">Integration</TabsTrigger>
           <TabsTrigger value="settings">Settings</TabsTrigger>
+          <TabsTrigger value="analytics">Analytics</TabsTrigger>
           <TabsTrigger value="logs">Logs</TabsTrigger>
         </TabsList>
         
@@ -117,6 +119,10 @@ export default async function ProjectPage({
             projectId={project.id}
             initialSettings={project.settings as Record<string, unknown>}
           />
+        </TabsContent>
+        
+        <TabsContent value="analytics" className="mt-6">
+          <AbuseAnalytics projectId={project.id} />
         </TabsContent>
         
         <TabsContent value="logs" className="mt-6">
