@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -34,7 +34,7 @@ export function AbuseAnalytics({ projectId }: AbuseAnalyticsProps) {
   const [loading, setLoading] = useState(true);
   const [timeRange, setTimeRange] = useState("24h");
 
-  const fetchMetrics = async () => {
+  const fetchMetrics = useCallback(async () => {
     setLoading(true);
     try {
       const response = await fetch(
@@ -48,11 +48,11 @@ export function AbuseAnalytics({ projectId }: AbuseAnalyticsProps) {
       console.error("Failed to fetch abuse metrics:", error);
     }
     setLoading(false);
-  };
+  }, [projectId, timeRange]);
 
   useEffect(() => {
     fetchMetrics();
-  }, [projectId, timeRange]);
+  }, [projectId, timeRange, fetchMetrics]);
 
   if (loading || !metrics) {
     return (
@@ -213,7 +213,7 @@ export function AbuseAnalytics({ projectId }: AbuseAnalyticsProps) {
                         {new Date(violation.createdAt).toLocaleString()}
                       </span>
                     </div>
-                    {violation.metaJSON.reason && (
+                    {violation.metaJSON.reason as string && (
                       <p className="text-sm text-gray-600">
                         {String(violation.metaJSON.reason).replace(/_/g, " ")}
                       </p>
@@ -228,3 +228,4 @@ export function AbuseAnalytics({ projectId }: AbuseAnalyticsProps) {
     </div>
   );
 }
+

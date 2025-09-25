@@ -49,7 +49,7 @@ export function CreateProjectModal({
         const errorData = await response.json();
         setError(errorData.error || "Failed to create project");
       }
-    } catch (error) {
+    } catch {
       setError("Failed to create project");
     } finally {
       setLoading(false);

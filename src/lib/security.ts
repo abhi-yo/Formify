@@ -1,6 +1,6 @@
 import { NextRequest } from "next/server";
 import { db } from "./db";
-import { logWarn, logError } from "./logger";
+import { logWarn } from "./logger";
 
 export interface SecurityCheck {
   passed: boolean;
@@ -83,10 +83,11 @@ export async function performSecurityChecks(
   const recentSubmissions = await db.submission.count({
     where: {
       projectId,
-      ipHash: require("crypto")
-        .createHash("sha256")
-        .update(clientIP)
-        .digest("hex"),
+       ipHash: await import("crypto").then(crypto => 
+         crypto.createHash("sha256")
+         .update(clientIP)
+         .digest("hex")
+       ),
       createdAt: {
         gte: new Date(Date.now() - 3600000),
       },
@@ -157,3 +158,4 @@ export function detectHoneypotViolation(
   }
   return false;
 }
+

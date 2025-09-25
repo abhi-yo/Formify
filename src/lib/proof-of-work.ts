@@ -74,3 +74,4 @@ export function generateClientScript(challenge: ProofOfWorkChallenge): string {
     }
   `;
 }
+

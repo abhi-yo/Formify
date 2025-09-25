@@ -45,7 +45,7 @@ export async function PUT(
     const updatedProject = await db.project.update({
       where: { id: projectId },
       data: {
-        settings: settings as Record<string, unknown>,
+        settings,
       },
     });
 
@@ -64,15 +64,15 @@ export async function PUT(
       success: true,
       settings: updatedProject.settings,
     });
-  } catch (error) {
-    if (error instanceof z.ZodError) {
+  } catch (err) {
+    if (err instanceof z.ZodError) {
       return NextResponse.json(
-        { error: "Invalid settings", details: error.errors },
+        { error: "Invalid settings", details: err.issues },
         { status: 400 }
       );
     }
 
-    console.error("Settings update error:", error);
+    console.error("Settings update error:", err);
     return NextResponse.json(
       { error: "Internal server error" },
       { status: 500 }

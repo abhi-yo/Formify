@@ -2,15 +2,15 @@ import Link from "next/link";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { 
-  BookOpen, 
-  Code, 
-  Shield, 
-  Zap, 
-  Mail, 
-  BarChart, 
+import {
+  BookOpen,
+  Code,
+  Shield,
+  Zap,
+  Mail,
+  BarChart,
   ExternalLink,
-  CheckCircle
+  CheckCircle,
 } from "lucide-react";
 
 export default function DocsPage() {
@@ -18,27 +18,48 @@ export default function DocsPage() {
     {
       icon: <Shield className="h-6 w-6 text-blue-600" />,
       title: "Advanced Security",
-      description: "Rate limiting, proof-of-work, honeypots, and spam detection",
-      items: ["HMAC signature verification", "IP-based rate limiting", "Bot detection", "Content analysis"]
+      description:
+        "Rate limiting, proof-of-work, honeypots, and spam detection",
+      items: [
+        "HMAC signature verification",
+        "IP-based rate limiting",
+        "Bot detection",
+        "Content analysis",
+      ],
     },
     {
       icon: <Mail className="h-6 w-6 text-green-600" />,
       title: "Email Notifications",
       description: "Reliable email delivery with custom templates",
-      items: ["Multiple recipients", "Custom templates", "Retry logic", "Delivery tracking"]
+      items: [
+        "Multiple recipients",
+        "Custom templates",
+        "Retry logic",
+        "Delivery tracking",
+      ],
     },
     {
       icon: <BarChart className="h-6 w-6 text-purple-600" />,
       title: "Analytics & Monitoring",
       description: "Comprehensive insights into form performance",
-      items: ["Submission analytics", "Security metrics", "CSV exports", "Real-time logs"]
+      items: [
+        "Submission analytics",
+        "Security metrics",
+        "CSV exports",
+        "Real-time logs",
+      ],
     },
     {
       icon: <Zap className="h-6 w-6 text-yellow-600" />,
       title: "Background Processing",
       description: "Reliable job processing with Inngest",
-      items: ["Async email sending", "Webhook delivery", "Retry mechanisms", "Error handling"]
-    }
+      items: [
+        "Async email sending",
+        "Webhook delivery",
+        "Retry mechanisms",
+        "Error handling",
+      ],
+    },
   ];
 
   const integrations = [
@@ -48,7 +69,7 @@ export default function DocsPage() {
       code: `<form data-formify data-secret="your-secret">
   <input name="email" type="email" required>
   <button type="submit">Submit</button>
-</form>`
+</form>`,
     },
     {
       name: "React",
@@ -56,13 +77,13 @@ export default function DocsPage() {
       code: `const { formify } = useFormify('your-api-key');
 const handleSubmit = (e) => {
   formify.submitForm(e.target);
-};`
+};`,
     },
     {
       name: "Vue.js",
       description: "Vue component with reactive data binding",
       code: `const formify = new FormifySDK('your-api-key');
-await formify.submitForm(this.$refs.form);`
+await formify.submitForm(this.$refs.form);`,
     },
     {
       name: "REST API",
@@ -72,8 +93,8 @@ await formify.submitForm(this.$refs.form);`
   "projectKey": "pub_...",
   "fields": { "email": "user@example.com" },
   "signature": "hmac-signature"
-}`
-    }
+}`,
+    },
   ];
 
   return (
@@ -158,7 +179,7 @@ await formify.submitForm(this.$refs.form);`
               </CardHeader>
               <CardContent>
                 <p className="text-gray-600">
-                  Add data-formify attribute to your forms and you're ready!
+                  Add data-formify attribute to your forms and you&apos;re ready!
                 </p>
                 <div className="mt-3 p-2 bg-gray-100 rounded text-xs font-mono">
                   {`<form data-formify>...</form>`}
@@ -179,7 +200,9 @@ await formify.submitForm(this.$refs.form);`
                     {feature.icon}
                     <div>
                       <CardTitle>{feature.title}</CardTitle>
-                      <p className="text-sm text-gray-600">{feature.description}</p>
+                      <p className="text-sm text-gray-600">
+                        {feature.description}
+                      </p>
                     </div>
                   </div>
                 </CardHeader>
@@ -212,7 +235,9 @@ await formify.submitForm(this.$refs.form);`
                     </CardTitle>
                     <Badge variant="outline">Example</Badge>
                   </div>
-                  <p className="text-sm text-gray-600">{integration.description}</p>
+                  <p className="text-sm text-gray-600">
+                    {integration.description}
+                  </p>
                 </CardHeader>
                 <CardContent>
                   <pre className="bg-gray-900 text-gray-100 p-4 rounded-lg overflow-x-auto text-sm">
@@ -238,7 +263,7 @@ await formify.submitForm(this.$refs.form);`
                   <div>
                     <h4 className="font-medium mb-2">Request Body</h4>
                     <pre className="bg-gray-900 text-gray-100 p-4 rounded-lg text-sm">
-{`{
+                      {`{
   "projectKey": "pub_1234567890abcdef",
   "fields": {
     "name": "John Doe",
@@ -259,7 +284,7 @@ await formify.submitForm(this.$refs.form);`
                   <div>
                     <h4 className="font-medium mb-2">Response</h4>
                     <pre className="bg-gray-900 text-gray-100 p-4 rounded-lg text-sm">
-{`{
+                      {`{
   "success": true,
   "submissionId": "sub_1234567890abcdef"
 }`}
@@ -279,14 +304,24 @@ await formify.submitForm(this.$refs.form);`
                   <div>
                     <h4 className="font-medium mb-2">Query Parameters</h4>
                     <ul className="space-y-2">
-                      <li><code className="bg-gray-100 px-2 py-1 rounded">key</code> - Your project's public key</li>
-                      <li><code className="bg-gray-100 px-2 py-1 rounded">debug</code> - Enable debug logging (optional)</li>
+                       <li>
+                         <code className="bg-gray-100 px-2 py-1 rounded">
+                           key
+                         </code>{" "}
+                         - Your project&apos;s public key
+                       </li>
+                      <li>
+                        <code className="bg-gray-100 px-2 py-1 rounded">
+                          debug
+                        </code>{" "}
+                        - Enable debug logging (optional)
+                      </li>
                     </ul>
                   </div>
                   <div>
                     <h4 className="font-medium mb-2">Example</h4>
                     <pre className="bg-gray-900 text-gray-100 p-4 rounded-lg text-sm">
-{`<script src="https://formify.app/api/script?key=pub_1234567890abcdef&debug=true"></script>`}
+                      {`<script src="https://formify.app/api/script?key=pub_1234567890abcdef&debug=true"></script>`}
                     </pre>
                   </div>
                 </div>
@@ -306,7 +341,9 @@ await formify.submitForm(this.$refs.form);`
                   <ul className="space-y-2">
                     <li className="flex items-center gap-2">
                       <Shield className="h-4 w-4 text-green-600" />
-                      <span className="text-sm">HMAC signature verification</span>
+                      <span className="text-sm">
+                        HMAC signature verification
+                      </span>
                     </li>
                     <li className="flex items-center gap-2">
                       <Shield className="h-4 w-4 text-green-600" />
@@ -347,7 +384,8 @@ await formify.submitForm(this.$refs.form);`
             <CardContent className="p-8">
               <h2 className="text-2xl font-bold mb-4">Ready to Get Started?</h2>
               <p className="text-gray-600 mb-6">
-                Join thousands of developers using Formify for secure, reliable form processing.
+                Join thousands of developers using Formify for secure, reliable
+                form processing.
               </p>
               <div className="flex justify-center gap-4">
                 <Button asChild size="lg">
@@ -364,3 +402,4 @@ await formify.submitForm(this.$refs.form);`
     </div>
   );
 }
+

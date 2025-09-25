@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -21,7 +21,7 @@ export function EventLogs({ projectId }: EventLogsProps) {
   const [logs, setLogs] = useState<EventLog[]>([]);
   const [loading, setLoading] = useState(true);
 
-  const fetchLogs = async () => {
+  const fetchLogs = useCallback(async () => {
     try {
       const response = await fetch(`/api/projects/${projectId}/logs`);
       if (response.ok) {
@@ -32,11 +32,11 @@ export function EventLogs({ projectId }: EventLogsProps) {
       console.error("Failed to fetch logs:", error);
     }
     setLoading(false);
-  };
+  }, [projectId]);
 
   useEffect(() => {
     fetchLogs();
-  }, [projectId]);
+  }, [fetchLogs]);
 
   const getLogTypeColor = (type: string) => {
     switch (type) {

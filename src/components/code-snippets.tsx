@@ -48,7 +48,7 @@ export function CodeSnippets({ publicKey, secretKey }: CodeSnippetsProps) {
 
 <script src="${baseURL}/api/script?key=${publicKey}&debug=true"></script>`,
     },
-    
+
     react: {
       title: "React Component",
       description: "React form component using Formify SDK",
@@ -305,7 +305,8 @@ form.addEventListener('submit', async (e) => {
       <div>
         <h2 className="text-2xl font-bold mb-2">Integration Code Snippets</h2>
         <p className="text-gray-600">
-          Choose your preferred framework and copy the code to get started quickly.
+          Choose your preferred framework and copy the code to get started
+          quickly.
         </p>
       </div>
 
@@ -363,9 +364,12 @@ form.addEventListener('submit', async (e) => {
                 Security Note
               </h4>
               <p className="text-sm text-yellow-700">
-                Your secret key is included in these examples for completeness, but{" "}
-                <strong>never expose your secret key in client-side code</strong>.
-                For production, implement server-side HMAC signing or use our
+                Your secret key is included in these examples for completeness,
+                but{" "}
+                <strong>
+                  never expose your secret key in client-side code
+                </strong>
+                . For production, implement server-side HMAC signing or use our
                 upcoming server-side SDKs.
               </p>
             </div>
@@ -375,3 +379,4 @@ form.addEventListener('submit', async (e) => {
     </div>
   );
 }
+

@@ -242,3 +242,4 @@
   // Export for manual initialization
   window.FormifySDK = FormifySDK;
 })();
+

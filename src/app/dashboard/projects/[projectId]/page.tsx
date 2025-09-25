@@ -92,7 +92,9 @@ export default async function ProjectPage({
               </div>
 
               <div>
-                <h3 className="font-medium mb-2">2. Add data-formify to Your Form</h3>
+                <h3 className="font-medium mb-2">
+                  2. Add data-formify to Your Form
+                </h3>
                 <div className="bg-gray-100 p-4 rounded text-sm font-mono">
                   {`<form data-formify data-secret="${project.secretKey}">
   <input type="text" name="name" required>
@@ -123,7 +125,7 @@ export default async function ProjectPage({
         </TabsContent>
 
         <TabsContent value="snippets" className="mt-6">
-          <CodeSnippets 
+          <CodeSnippets
             publicKey={project.publicKey}
             secretKey={project.secretKey}
           />

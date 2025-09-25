@@ -24,7 +24,10 @@ export const projectSchema = z.object({
       webhookUrl: z.string().url().optional(),
       slackWebhook: z.string().url().optional(),
     })
-    .default({}),
+    .default({
+      emailForwarding: false,
+      allowedOrigins: [],
+    }),
 });
 
 export const attachmentSchema = z.object({

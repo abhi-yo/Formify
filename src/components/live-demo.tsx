@@ -39,7 +39,7 @@ export function LiveDemo() {
         status: "success",
       },
       {
-        id: "demo-2", 
+        id: "demo-2",
         name: "Jane Smith",
         email: "jane@example.com",
         message: "Another demo submission to show how it works.",
@@ -63,12 +63,12 @@ export function LiveDemo() {
       status: "processing",
     };
 
-    setSubmissions(prev => [newSubmission, ...prev]);
+    setSubmissions((prev) => [newSubmission, ...prev]);
 
     // Simulate processing time
     setTimeout(() => {
-      setSubmissions(prev =>
-        prev.map(sub =>
+      setSubmissions((prev) =>
+        prev.map((sub) =>
           sub.id === newSubmission.id
             ? { ...sub, status: "success" as const }
             : sub
@@ -114,8 +114,8 @@ export function LiveDemo() {
         </div>
         <p className="text-gray-600 max-w-2xl mx-auto">
           Try out Formify with this interactive demo. Submit the form below and
-          watch your submission appear in real-time with all the security features
-          in action.
+          watch your submission appear in real-time with all the security
+          features in action.
         </p>
       </div>
 
@@ -125,7 +125,8 @@ export function LiveDemo() {
           <CardHeader>
             <CardTitle>Demo Contact Form</CardTitle>
             <p className="text-sm text-gray-600">
-              This form is powered by Formify with all security features enabled.
+              This form is powered by Formify with all security features
+              enabled.
             </p>
           </CardHeader>
           <CardContent>
@@ -137,7 +138,7 @@ export function LiveDemo() {
                   type="text"
                   value={formData.name}
                   onChange={(e) =>
-                    setFormData(prev => ({ ...prev, name: e.target.value }))
+                    setFormData((prev) => ({ ...prev, name: e.target.value }))
                   }
                   required
                   placeholder="Your full name"
@@ -151,7 +152,7 @@ export function LiveDemo() {
                   type="email"
                   value={formData.email}
                   onChange={(e) =>
-                    setFormData(prev => ({ ...prev, email: e.target.value }))
+                    setFormData((prev) => ({ ...prev, email: e.target.value }))
                   }
                   required
                   placeholder="your.email@example.com"
@@ -164,7 +165,10 @@ export function LiveDemo() {
                   id="demo-message"
                   value={formData.message}
                   onChange={(e) =>
-                    setFormData(prev => ({ ...prev, message: e.target.value }))
+                    setFormData((prev) => ({
+                      ...prev,
+                      message: e.target.value,
+                    }))
                   }
                   required
                   placeholder="Tell us what you think about Formify!"
@@ -173,11 +177,7 @@ export function LiveDemo() {
                 />
               </div>
 
-              <Button
-                type="submit"
-                disabled={isSubmitting}
-                className="w-full"
-              >
+              <Button type="submit" disabled={isSubmitting} className="w-full">
                 {isSubmitting ? "Sending..." : "Send Message"}
               </Button>
             </form>
@@ -205,7 +205,7 @@ export function LiveDemo() {
               <Badge variant="outline">{submissions.length}</Badge>
             </CardTitle>
             <p className="text-sm text-gray-600">
-              Watch submissions appear in real-time as they're processed.
+              Watch submissions appear in real-time as they&apos;re processed.
             </p>
           </CardHeader>
           <CardContent>
@@ -232,12 +232,14 @@ export function LiveDemo() {
                         {new Date(submission.timestamp).toLocaleTimeString()}
                       </span>
                     </div>
-                    
+
                     <div>
                       <p className="font-medium">{submission.name}</p>
-                      <p className="text-sm text-gray-600">{submission.email}</p>
+                      <p className="text-sm text-gray-600">
+                        {submission.email}
+                      </p>
                     </div>
-                    
+
                     <p className="text-sm bg-gray-50 p-2 rounded">
                       {submission.message}
                     </p>
@@ -368,3 +370,4 @@ export function LiveDemo() {
     </div>
   );
 }
+
